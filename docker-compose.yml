@@ -5,16 +5,20 @@ services:
     container_name: redis
     logging:
       driver: "none"
+    volumes:
+      - ./volume/redis/data:/data
   mongodb:
     image: mongo
     container_name: mongodb
     logging:
       driver: "none"
+    volumes:
+      - ./volume/data/db:/data/db
     environment:
       - PUID=1000
       - PGID=1000
-    volumes:
-      - mongodb:/data/db
+    # volumes:
+    #   - mongodb:/data/db
     ports:
       - 27017:27017
     restart: unless-stopped
@@ -97,5 +101,5 @@ services:
       WIDGET_URL: ${WIDGET_URL}
     ports:
       - 4701:4701
-volumes:
-  mongodb: ~
+# volumes:
+#   mongodb: ~
