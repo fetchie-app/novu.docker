@@ -23,7 +23,7 @@ services:
       - 27017:27017
     restart: unless-stopped
   api:
-    image: "ghcr.io/novuhq/novu/api:0.12.0"
+    image: 'ghcr.io/novuhq/novu/api:0.13.0'
     depends_on:
       - mongodb
       - redis
@@ -51,9 +51,9 @@ services:
       NEW_RELIC_APP_NAME: ${NEW_RELIC_APP_NAME}
       NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
     ports:
-      - "3000:3000"
+      - '3000:3000'
   ws:
-    image: "ghcr.io/novuhq/novu/ws:0.12.0"
+    image: 'ghcr.io/novuhq/novu/ws:0.13.0'
     depends_on:
       - mongodb
       - redis
@@ -66,10 +66,9 @@ services:
       REDIS_PORT: ${REDIS_PORT}
       JWT_SECRET: ${JWT_SECRET}
     ports:
-      - "3002:3002"
+      - '3002:3002'
   web:
-    # image: 'ghcr.io/novuhq/novu/web:0.12.0'
-    image: "ghcr.io/joeyeamigh/novu/web:nv-1803"
+    image: 'ghcr.io/novuhq/novu/web:0.13.0'
     depends_on:
       - api
     container_name: web
@@ -77,6 +76,6 @@ services:
       REACT_APP_API_URL: ${API_ROOT_URL}
       REACT_APP_ENVIRONMENT: ${NODE_ENV}
       REACT_APP_WIDGET_EMBED_PATH: ${WIDGET_EMBED_PATH}
-      REACT_APP_DOCKER_HOSTED_ENV: "true"
+      REACT_APP_DOCKER_HOSTED_ENV: 'true'
     ports:
       - 4200:4200
