@@ -7,6 +7,7 @@ services:
       driver: "none"
     volumes:
       - ./volume/redis/data:/data
+    restart: always
   mongodb:
     image: mongo
     container_name: mongodb
@@ -21,7 +22,7 @@ services:
     #   - mongodb:/data/db
     ports:
       - 27017:27017
-    restart: unless-stopped
+    restart: always
   api:
     image: 'ghcr.io/novuhq/novu/api:0.13.0'
     depends_on:
@@ -52,6 +53,7 @@ services:
       NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
     ports:
       - '3000:3000'
+    restart: always
   ws:
     image: 'ghcr.io/novuhq/novu/ws:0.13.0'
     depends_on:
@@ -67,6 +69,7 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     ports:
       - '3002:3002'
+    restart: always
   web:
     image: 'ghcr.io/novuhq/novu/web:0.13.0'
     depends_on:
@@ -79,3 +82,4 @@ services:
       REACT_APP_DOCKER_HOSTED_ENV: 'true'
     ports:
       - 4200:4200
+    restart: always
