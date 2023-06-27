@@ -24,7 +24,7 @@ services:
       - 27017:27017
     restart: always
   api:
-    image: 'ghcr.io/novuhq/novu/api:0.15.0'
+    image: 'ghcr.io/novuhq/novu/api:0.16.0'
     depends_on:
       - mongodb
       - redis
@@ -58,7 +58,7 @@ services:
     restart: always
 
   worker:
-    image: 'ghcr.io/novuhq/novu/worker:0.15.0'
+    image: 'ghcr.io/novuhq/novu/worker:0.16.0'
     depends_on:
       - mongodb
       - redis
@@ -83,7 +83,7 @@ services:
       NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
 
   ws:
-    image: 'ghcr.io/novuhq/novu/ws:0.15.0'
+    image: 'ghcr.io/novuhq/novu/ws:0.16.0'
     depends_on:
       - mongodb
       - redis
@@ -101,7 +101,7 @@ services:
       - '3002:3002'
     restart: always
   web:
-    image: 'ghcr.io/novuhq/novu/web:0.15.0'
+    image: 'ghcr.io/novuhq/novu/web:0.16.0'
     depends_on:
       - api
     container_name: web
