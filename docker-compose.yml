@@ -81,6 +81,7 @@ services:
       SENTRY_DSN: ${SENTRY_DSN}
       NEW_RELIC_APP_NAME: ${NEW_RELIC_APP_NAME}
       NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
+    restart: always
 
   ws:
     image: 'ghcr.io/novuhq/novu/ws:0.16.0'
