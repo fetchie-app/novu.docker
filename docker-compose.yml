@@ -24,16 +24,11 @@ services:
       - 27017:27017
     restart: always
   api:
-    image: 'ghcr.io/novuhq/novu/api:0.21.0'
+    image: 'ghcr.io/novuhq/novu/api:0.22.0'
     depends_on:
       - mongodb
       - redis
     container_name: api
-    # volumes:
-    #   - ./scripts/apps/:/scripts/apps
-    working_dir: /usr/src/app/apps/api
-    # command: sh -c "echo "baeldung" && npm run migration && echo "API-----docker""
-    command: sh -c "pm2-runtime start dist/main.js"
     environment:
       NODE_ENV: ${NODE_ENV}
       API_ROOT_URL: ${API_ROOT_URL}
@@ -64,7 +59,7 @@ services:
     restart: always
 
   worker:
-    image: 'ghcr.io/novuhq/novu/worker:0.21.0'
+    image: 'ghcr.io/novuhq/novu/worker:0.22.0'
     depends_on:
       - mongodb
       - redis
@@ -91,7 +86,7 @@ services:
     restart: always
 
   ws:
-    image: 'ghcr.io/novuhq/novu/ws:0.21.0'
+    image: 'ghcr.io/novuhq/novu/ws:0.22.0'
     depends_on:
       - mongodb
       - redis
@@ -110,7 +105,7 @@ services:
       - '3002:3002'
     restart: always
   web:
-    image: 'ghcr.io/novuhq/novu/web:0.21.0'
+    image: 'ghcr.io/novuhq/novu/web:0.22.0'
     depends_on:
       - api
       - worker
