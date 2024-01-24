@@ -2,7 +2,7 @@
 
 ## Production `docker-compose.yml`
 
-> Producttion setup using external mongodb server.
+> Use this docker file if your using external mongodb connection
 
 This file does't have mongodb container dependency
 
