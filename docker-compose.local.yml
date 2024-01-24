@@ -1,7 +1,6 @@
-# Production Dockerfile
-# This docker compose doesn't have mongodb container dependency
-# For Testing locally,  please use docker-compose.local.yml
-
+# This file intent to test novu containers locally
+# $ docker compose -f ./docker-compose.local.yml up
+# $ docker compose -f ./docker-compose.local.yml down
 
 version: "3"
 services:
@@ -13,10 +12,23 @@ services:
     volumes:
       - ./volume/redis/data:/data
     restart: always
-  
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    logging:
+      driver: "none"
+    volumes:
+      - ./volume/data/db:/data/db
+    environment:
+      - PUID=1000
+      - PGID=1000
+    ports:
+      - 27017:27017
+    restart: always
   api:
     image: 'ghcr.io/novuhq/novu/api:0.22.0'
     depends_on:
+      - mongodb
       - redis
     container_name: api
     environment:
@@ -51,6 +63,7 @@ services:
   worker:
     image: 'ghcr.io/novuhq/novu/worker:0.22.0'
     depends_on:
+      - mongodb
       - redis
     container_name: worker
     environment:
@@ -77,6 +90,7 @@ services:
   ws:
     image: 'ghcr.io/novuhq/novu/ws:0.22.0'
     depends_on:
+      - mongodb
       - redis
     container_name: ws
     environment:
